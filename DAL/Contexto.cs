@@ -11,7 +11,6 @@ namespace RolesConPermisos.DAL
     public class Contexto : DbContext
     {
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<RolesDetalles> RolesDetalles { get; set; }
         public DbSet<Permisos> Permisos { get; set; }
 
 

@@ -67,6 +67,13 @@ namespace RolesConPermisos.BLL
 
             try
             {
+                contexto.Database.ExecuteSqlRaw($"'Delete FROM RolesDetalles Where RolID={roles.RolID}");
+
+                foreach (var item in roles.RolesDetalle)
+                {
+                    contexto.Entry(item).State = EntityState.Added;
+                }
+
                 contexto.Entry(roles).State = EntityState.Modified;
                 paso = contexto.SaveChanges() > 0;
             }
@@ -93,12 +100,9 @@ namespace RolesConPermisos.BLL
             try
             {
                 var roles = contexto.Roles.Find(id);
+                contexto.Entry(roles).State = EntityState.Deleted;
+                paso = (contexto.SaveChanges() > 0);
 
-                if (roles != null)
-                {
-                    contexto.Roles.Remove(roles);
-                    paso = contexto.SaveChanges() > 0;
-                }
             }
             catch (Exception)
             {
@@ -118,11 +122,11 @@ namespace RolesConPermisos.BLL
         public static Roles Buscar(int id)
         {
             Contexto contexto = new Contexto();
-            Roles roles;
+            Roles roles = new Roles();
 
             try
             {
-                roles = contexto.Roles.Find(id);
+                roles = contexto.Roles.Include(x => x.RolesDetalle).Where(p => p.RolID == id).SingleOrDefault();
             }
             catch (Exception)
             {

@@ -1,0 +1,58 @@
+﻿<Window x:Class="RolesConPermisos.UI.Registros.rRoles"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RolesConPermisos.UI.Registros"
+        mc:Ignorable="d"
+        Title="Registros de Roles" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="276,12,215,345">
+            <Label Content="Rol ID" Height="42"/>
+            <TextBox x:Name="RolIDTextBox" Text="{Binding RolID}" Width="102" Height="20" Margin="0,-15,0,0"/>
+            <Button x:Name="BuscarButton" Height="33" Width="53" HorizontalAlignment="Right" Margin="10,0,0,15" Click="BuscarButton_Click">
+                <Label Content="Buscar"/>
+            </Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,51,0,307">
+            <Label Content="Descripcion" Height="30"/>
+            <TextBox x:Name="DescripcionTextBox" Text="{Binding Descripcion}" Width="285" Height="20"/>
+            <CheckBox Content="Activo" IsChecked="{Binding esActivo}" Height="15" Width="80" Margin="15,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="76,106,82,36" Background="White" >
+
+
+            <StackPanel Orientation="Horizontal"  Height="44" VerticalAlignment="Top" >
+                <Label Content="Permisos" Height="32" />
+                <ComboBox x:Name="PermisosComboBox" Width="196" Height="22"/>
+            </StackPanel>
+            <DataGrid x:Name="DetalleDataGrid" ItemsSource="{Binding RolesDetalles}"  AutoGenerateColumns="False" Width="582" Height="168" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Permiso ID" Binding="{Binding PermisoID}"/>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"/>
+                    <DataGridTextColumn Header="Es Asignado" Binding="{Binding esAsignado}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Width="232">
+                <Button x:Name="NuevoButton" Width="60" Margin="0,0,10,0" Click="NuevoButton_Click">
+                    <Label Content="Nuevo"></Label>
+                </Button>
+                <Button x:Name="GuardarButton1" Width="60" Margin="0,0,10,0" Click="GuardarButton_Click">
+                    <Label x:Name="GuardarButton" Content="Guardar"></Label>
+                </Button>
+                <Button x:Name="EliminarButton" Width="60" Click="EliminarButton_Click">
+                    <Label Content="Eliminar"></Label>
+                </Button>
+            </StackPanel>
+
+
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>

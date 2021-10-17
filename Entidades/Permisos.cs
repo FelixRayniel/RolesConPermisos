@@ -13,7 +13,7 @@ namespace RolesConPermisos.Entidades
         public int PermisoID { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public int VecesAsingdo { get; set; }
+       
 
     }
 }

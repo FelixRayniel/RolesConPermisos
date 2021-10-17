@@ -14,7 +14,7 @@ namespace RolesConPermisos.Entidades
         public int RolID { get; set; }
         public int PermisoId { get; set; }
         public bool esAsignado { get; set; }
-        public string NombreAsignado { get; set; }
+       
 
 
     }

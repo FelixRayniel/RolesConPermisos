@@ -17,26 +17,22 @@ using System.Windows.Shapes;
 namespace RolesConPermisos.UI.Registros
 {
     /// <summary>
-    /// Lógica de interacción para rRoles.xaml
+    /// Lógica de interacción para rPermisos.xaml
     /// </summary>
-    public partial class rRoles : Window
+    public partial class rPermisos : Window
     {
-        private Roles rol = new Roles();
-        public rRoles()
+        private Permisos permiso = new Permisos();
+        public rPermisos()
         {
             InitializeComponent();
-            this.DataContext = rol;
-            RolIDTextBox.Text = "0";
-            PermisosComboBox.ItemsSource = PermisosBLL.GetPermisos();
-            PermisosComboBox.SelectedValuePath = "PermisoID";
-            PermisosComboBox.DisplayMemberPath = "Descripcion";
-
+            this.DataContext = permiso;
+            PermisoIDTextBox.Text = "0";
         }
 
         private void Limpiar()
         {
-            this.rol = new Roles();
-            this.DataContext = rol;
+            this.permiso = new Permisos();
+            this.DataContext = permiso;
 
         }
 
@@ -64,7 +60,7 @@ namespace RolesConPermisos.UI.Registros
             if (!Validar())
                 return;
 
-            var paso = RolesBLL.Guardar(rol);
+            var paso = PermisosBLL.Guardar(permiso);
 
             if (paso)
             {
@@ -80,7 +76,7 @@ namespace RolesConPermisos.UI.Registros
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesBLL.Eliminar(Utilidades.ToInt(RolIDTextBox.Text)))
+            if (RolesBLL.Eliminar(Utilidades.ToInt(PermisoIDTextBox.Text)))
             {
                 Limpiar();
                 MessageBox.Show("Registro eliminado!", "Exito",
@@ -91,41 +87,21 @@ namespace RolesConPermisos.UI.Registros
                     MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-     
-
         private void BuscarButton_Click(object sender, RoutedEventArgs e)
         {
-            var roles = RolesBLL.Buscar(Utilidades.ToInt(RolIDTextBox.Text));
+            var permisos = PermisosBLL.Buscar(Utilidades.ToInt(PermisoIDTextBox.Text));
 
-            if (rol != null)
-                this.rol = roles;
+            if (permiso != null)
+                this.permiso = permisos;
             else
-                this.rol = new Roles();
+                this.permiso = new Permisos();
 
-            this.DataContext = this.rol;
+            this.DataContext = this.permiso;
         }
-
         public void Actualizar()
         {
             this.DataContext = null;
-            this.DataContext = rol;
-        }
-
-        private void AgregarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            rol.RolesDetalle.Add(new RolesDetalles(rol.RolID, (int)PermisosComboBox.SelectedValue, Activo.IsEnabled));
-            Actualizar();
-        }
-
-        private void AgregarButton_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.DataContext = permiso;
         }
     }
 }

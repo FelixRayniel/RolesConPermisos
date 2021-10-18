@@ -31,5 +31,11 @@ namespace RolesConPermisos
             rRoles rr = new rRoles();
             rr.Show();
         }
+
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {
+            rPermisos rr = new rPermisos();
+            rr.Show();
+        }
     }
 }
